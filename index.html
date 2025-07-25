@@ -1,371 +1,630 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>morrelgonj</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Oxanium:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --dark-1: #0a0a0a;
-            --dark-2: #1a1a1a;
-            --neon-red: #ff003c;
-            --neon-blue: #00f0ff;
-            --neon-purple: #9600ff;
-            --glow: 0 0 10px, 0 0 20px, 0 0 30px;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            background: radial-gradient(circle at center, var(--dark-1), var(--dark-2));
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            font-family: 'Oxanium', sans-serif;
-        }
-        
-        .container {
-            max-width: 800px;
-            width: 90%;
-            padding: 3rem;
-            text-align: center;
-            background: rgba(10, 10, 10, 0.8);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 30px rgba(150, 0, 255, 0.2);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            backdrop-filter: blur(5px);
-        }
-        
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            background: linear-gradient(90deg, var(--neon-red), var(--neon-purple), var(--neon-blue));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 10px rgba(255, 0, 60, 0.5);
-            animation: hue-rotate 8s linear infinite;
-        }
-        
-        p {
-            font-size: 1.2rem;
-            margin-bottom: 2.5rem;
-            line-height: 1.7;
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 2.5rem 0;
-        }
-        
-        .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 1.5rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .social-link:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 15px var(--neon-purple);
-            background: rgba(150, 0, 255, 0.2);
-        }
-        
-        .social-link.facebook:hover {
-            box-shadow: 0 0 15px #1877f2;
-            background: rgba(24, 119, 242, 0.2);
-        }
-        
-        .social-link.telegram:hover {
-            box-shadow: 0 0 15px #0088cc;
-            background: rgba(0, 136, 204, 0.2);
-        }
-        
-        .loader {
-            display: flex;
-            justify-content: center;
-            margin: 3rem 0;
-        }
-        
-        .loader-bar {
-            width: 10px;
-            height: 40px;
-            margin: 0 5px;
-            background: linear-gradient(to top, var(--neon-red), var(--neon-purple));
-            border-radius: 5px;
-            animation: loader-anim 1.2s infinite ease-in-out;
-            box-shadow: 0 0 10px var(--neon-purple);
-        }
-        
-        .loader-bar:nth-child(1) {
-            animation-delay: -0.4s;
-        }
-        
-        .loader-bar:nth-child(2) {
-            animation-delay: -0.2s;
-        }
-        
-        .loader-bar:nth-child(3) {
-            animation-delay: 0s;
-        }
-        
-        .cyber-grid {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(rgba(255, 0, 60, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 0, 60, 0.1) 1px, transparent 1px);
-            background-size: 30px 30px;
-            z-index: -1;
-            opacity: 0.3;
-        }
-        
-        .floating-text {
-            position: absolute;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.8rem;
-            color: rgba(0, 240, 255, 0.3);
-            animation: float-text 20s linear infinite;
-            z-index: -1;
-            user-select: none;
-        }
-        
-        @keyframes loader-anim {
-            0%, 100% {
-                transform: scaleY(0.6);
-            }
-            50% {
-                transform: scaleY(1.5);
-            }
-        }
-        
-        @keyframes hue-rotate {
-            0% {
-                filter: hue-rotate(0deg);
-            }
-            100% {
-                filter: hue-rotate(360deg);
-            }
-        }
-        
-        @keyframes float-text {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.3;
-            }
-            90% {
-                opacity: 0.3;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        
-        .glitch-btn {
-            position: relative;
-            padding: 15px 30px;
-            background: transparent;
-            color: var(--neon-blue);
-            border: 2px solid var(--neon-blue);
-            font-family: 'Oxanium', sans-serif;
-            font-weight: bold;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: all 0.3s;
-            overflow: hidden;
-            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
-            margin-top: 1rem;
-        }
-        
-        .glitch-btn:hover {
-            background: rgba(0, 240, 255, 0.1);
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
-            animation: glitch 0.5s linear infinite;
-        }
-        
-        @keyframes glitch {
-            0% {
-                text-shadow: 2px 0 var(--neon-red), -2px 0 var(--neon-purple);
-            }
-            25% {
-                text-shadow: -2px 0 var(--neon-red), 2px 0 var(--neon-purple);
-            }
-            50% {
-                text-shadow: 2px 0 var(--neon-purple), -2px 0 var(--neon-red);
-            }
-            75% {
-                text-shadow: -2px 0 var(--neon-purple), 2px 0 var(--neon-red);
-            }
-            100% {
-                text-shadow: 2px 0 var(--neon-red), -2px 0 var(--neon-purple);
-            }
-        }
-        
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            p {
-                font-size: 1rem;
-            }
-            
-            .container {
-                padding: 2rem 1.5rem;
-            }
-            
-            .social-links {
-                gap: 15px;
-            }
-            
-            .social-link {
-                width: 45px;
-                height: 45px;
-                font-size: 1.3rem;
-            }
-        }
-    </style>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>আমাদের - মোরেলগঞ্জ</title>
+    <!-- Google Fonts (Bangla) -->
+    <link rel="icon" href="https://img.icons8.com/scribby/50/map-marker.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@700&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#007bff">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="morrelgonj.css" />
 </head>
+
 <body>
-    <div class="container">
-        <div class="cyber-grid"></div>
-        
-        <h1>ABDULLHA ZONE</h1>
-        <p>Our dark realm is undergoing powerful upgrades. The demons are working hard to bring you an even more hellish experience!</p>
-        
-        <div class="loader">
-            <div class="loader-bar"></div>
-            <div class="loader-bar"></div>
-            <div class="loader-bar"></div>
+    <!-- Loader -->
+    <div id="preloader">
+        <div class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-        
-        <div class="social-links">
-            <a href="https://web.facebook.com/profile.php?id=100089818537734" class="social-link facebook" target="_blank">f</a>
-            <a href="https://t.me/PRO_CODE_X" class="social-link telegram" target="_blank">t</a>
+        <div>লোড হচ্ছে... </div>
+    </div>
+    <!-- Dark Mode Button -->
+    <button class="toggle-dark" id="darkModeBtn" title="ডার্ক মোড/লাইট মোড"><i class="fas fa-moon"></i></button>
+    <!-- Header -->
+    <header>
+        <span class="dedication"><i class="fa-solid fa-heart"></i> এই ওয়েবসাইটটি আমার প্রিয় মা'র নামে উৎসর্গিত</span>
+        <h1>আমাদের মোরেলগঞ্জ</h1>
+        <p>আমাদের এলাকার গর্ব, সৌন্দর্য ও ভালোবাসার ছোঁয়া</p>
+    </header>
+    <!-- Navbar -->
+    <nav id="nav">
+        <button id="navToggle" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+        <div id="navLinks">
+            <a href="#history"><i class="fa-solid fa-landmark"></i> ইতিহাস</a>
+            <a href="#slider"><i class="fa-solid fa-image"></i> সৌন্দর্য</a>
+            <a href="#places"><i class="fa-solid fa-location-dot"></i> দর্শনীয়</a>
+            <a href="#shop"><i class="fa-solid fa-shop"></i> পণ্য</a>
+            <a href="#education-culture"><i class="fa-solid fa-book-open"></i> বিদ্যালয়</a>
+            <a href="#agriculture-economy"><i class="fa-solid fa-leaf"></i> হাসপাতাল</a>
+            <a href="#memory"><i class="fa-solid fa-heart"></i> মা'র স্মৃতি</a>
+            <a href="#gallery"><i class="fa-brands fa-youtube"></i> ইউটিউব গ্যালারি</a>
+            <a href="#testimonial"><i class="fa-solid fa-comment-dots"></i> টেস্টিমোনিয়াল</a>
+            <a href="#contact"><i class="fa-solid fa-envelope"></i> কন্টাক্ট</a>
+            <a href="#map"><i class="fa-solid fa-map-location-dot"></i> মানচিত্র</a>
+            <a href="#audio"><i class="fa-solid fa-music"></i> অডিও</a>
         </div>
-        
-        <button href="https://xylon.netlify.app/" class="glitch-btn" id="glitchBtn" >Summon Updates</button>
+    </nav>
+    <main>
+        <!-- ইতিহাস ও ঐতিহ্য -->
+        <section id="history" class="section">
+            <div class="section-title"><i class="fa-solid fa-landmark"></i> ইতিহাস ও ঐতিহ্য</div>
+            <div class="history-content">
+                <p>মোরেলগঞ্জের নামকরণ করা হয়েছে মোরেল পরিবারের নামে। ব্রিটিশ শাসনামলে হেনরি মোরেল কুঠি বাড়ি প্রতিষ্ঠা
+                    করেন এবং জোরপূর্বক শ্রম ও নির্যাতনের মাধ্যমে স্থানীয়দের আতঙ্কিত করেন। এর প্রতিবাদে, বড়ইখালীর
+                    রহিমুল্লাহর নেতৃত্বে কৃষক বিদ্রোহ ছড়িয়ে পড়ে, যিনি ১৮৬১ সালের ২৫ নভেম্বর নিহত হন।</p>
+                <p class="mt-4">১৯৭১ সালের বাংলাদেশ যুদ্ধের সময়, ১৫ আগস্ট ১৯৭১ সালে যোদ্ধাদের সাথে রাজাকারদের সংঘর্ষে
+                    ৩৫ জন নিহত হন। মুক্তিযুদ্ধের স্মৃতিস্তম্ভে এটি স্মরণ করা হয়।</p>
+                <img src="images/morrelgonj.jpg" alt="ঐতিহাসিক স্থান"
+                    style="width:100%; max-width: 600px; height: auto; margin-top: 1.5rem; display: block; margin-left: auto; margin-right: auto;">
+                <p class="text-sm text-center text-gray-600 dark:text-gray-400 mt-2">মোরেলগঞ্জের একটি প্রাচীন স্থাপনা,
+                    যা ইতিহাসের সাক্ষী।</p>
+            </div>
+        </section>
+        <!-- প্রাকৃতিক সৌন্দর্য (স্লাইডার) -->
+        <section id="slider" class="section">
+            <div class="section-title"><i class="fa-solid fa-image"></i> প্রাকৃতিক সৌন্দর্য</div>
+            <div class="slider" id="natureSlider">
+                <button class="slider-btn prev" onclick="slide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+                <img src="images/a1.png" alt="ABDULLHA">
+                <img src="images/a17.jpeg" alt="ABDULLHA">
+                <img src="images/a3.png" alt="ABDULLHA">
+                <img src="images/a5.jpg" alt="ABDULLHA">
+                <img src="images/a6.jpg" alt="ABDULLHA">
+                <img src="images/a7.jpg" alt="ABDULLHA">
+                <img src="images/a8.jpeg" alt="ABDULLHA">
+                <img src="images/a9.jpeg" alt="ABDULLHA">
+                <img src="images/a10.jpeg" alt="ABDULLHA">
+                <img src="images/a11.jpeg" alt="ABDULLHA">
+                <img src="images/a12.jpeg" alt="ABDULLHA">
+                <img src="images/a13.jpeg" alt="ABDULLHA">
+                <img src="images/a14.jpeg" alt="ABDULLHA">
+                <button class="slider-btn next" onclick="slide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+            <p class="text-sm text-center text-gray-600 dark:text-gray-400 mt-2">
+                নদী, শস্যভরা মাঠ, মেঘ, নীল আকাশ এবং স্বচ্ছ বাতাস মোরেলগঞ্জের স্বাভাবিক সৌন্দর্য প্রকাশ করে। এখানকার সবুজ
+                প্রকৃতি এবং পাখির কলতান মনকে প্রশান্তি এনে দেয়।
+            </p>
+        </section>
+        <!-- দর্শনীয় স্থান (কার্ড) -->
+        <section id="places" class="section">
+            <div class="section-title"><i class="fa-solid fa-map-location-dot"></i> দর্শনীয় স্থান</div>
+            <div class="card-grid">
+                <div class="card">
+                    <img src="images/park.png" alt="ABDULLHA">
+                    <div class="card-content">
+                        <h3>কুঠিবাড়ি ডিসি পার্ক</h3>
+                        <p>মোরেলগঞ্জে পর্যটনের সম্ভাবনায় নতুন দিগন্ত খুলছে নীল কুঠিরের কুঠিবাড়ি। পানগুছি নদীর তীরে ডিসি
+                            পার্ক ঘিরে গড়ে উঠছে এক মনোরম পর্যটন কেন্দ্র।</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="images/aa.png" alt="ABDULLHA">
+                    <div class="card-content">
+                        <h3>মডেল মসজিদ</h3>
+                        <p>মোরেলগঞ্জে গড়ে উঠেছে আধুনিক সুযোগ-সুবিধাসম্পন্ন মডেল মসজিদ। ধর্মীয় ও সামাজিক কার্যক্রমে নতুন
+                            মাত্রা যোগ করেছে এই মসজিদটি।</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="images/ss.png" alt="ABDULLHA">
+                    <div class="card-content">
+                        <h3>এস.এম কলেজ প্লেগ্রাউন্ড</h3>
+                        <p>গোবট এস.এম কলেজের প্লেগ্রাউন্ড শিক্ষার্থী ও ক্রীড়াপ্রেমীদের প্রাণকেন্দ্র। খেলাধুলা ও বিভিন্ন
+                            সাংস্কৃতিক আয়োজনে মুখরিত থাকে এই মাঠটি।</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="images/kk1.png" alt="ABDULLHA">
+                    <div class="card-content">
+                        <h3>পুরাতন মোরেল বাড়ি</h3>
+                        <p>মোরেলগঞ্জের ইতিহাসের সাক্ষী পুরাতন মোরেল বাড়ি আজও অতীতের স্মৃতি বহন করছে। স্থাপত্যের অনন্য
+                            নিদর্শন হিসেবে এটি পর্যটকদেরও আকর্ষণ করছে।</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="images/aclaha.png" alt="ABDULLHA">
+                    <div class="card-content">
+                        <h3>এ. সি. লাহা বিদ্যালয়</h3>
+                        <p>এ. সি. লাহা পাইলট উচ্চ বিদ্যালয়ের নদীর পাড় মোরেলগঞ্জের একটি মনোরম ও ঐতিহাসিক দর্শনীয় স্থান।
+                            শিক্ষার্থী ও দর্শনার্থীদের জন্য এটি এক শান্তিপূর্ণ ও পরিবেশবান্ধব মিলনস্থল।</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="images/gab.png" alt="ABDULLHA">
+                    <div class="card-content">
+                        <h3>শহীদ মিনার</h3>
+                        <p>ভাষা শহীদদের স্মরণে নির্মিত এই মিনারটি এলাকার ইতিহাস ও ত্যাগের প্রতীক।</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- স্থানীয় পণ্য শপ -->
+        <section id="shop" class="section">
+            <div class="section-title"><i class="fa-solid fa-shop"></i> স্থানীয় পণ্য শপ</div>
+            <div class="shop-grid">
+                <div class="shop-item">
+                    <img src="images/mas.jfif" alt="ABDULLHA">
+                    <h4><i class="fa-solid fa-fish"></i> সাগরের মাছ</h4>
+                    <div>সাগরের মাছ পুষ্টিগুণে ভরপুর একটি মূল্যবান প্রাকৃতিক সম্পদ।</div>
+                    <button class="product-description-btn" data-product="সাগরের মাছ">✨ বিবরণ</button>
+                </div>
+                <div class="shop-item">
+                    <img src="images/kajur.jfif" alt="ABDULLHA">
+                    <h4><i class="fa-solid fa-cube"></i> খেজুর গুড়</h4>
+                    <div>বিশুদ্ধ ও খাঁটি খেজুর গুড়, যা শীতের খাঁটি স্বাদ নিয়ে আসে।</div>
+                    <button class="product-description-btn" data-product="খেজুর গুড়">✨ বিবরণ</button>
+                </div>
+                <div class="shop-item">
+                    <img src="images/modu.jfif" alt="ABDULLHA">
+                    <h4><i class="fa-solid fa-jar"></i> স্থানীয় মধু</h4>
+                    <div>প্রাকৃতিক সুন্দরবনের মধু খাদ্যে ও স্বাস্থ্য সচেতনদের জন্য আদর্শ।</div>
+                    <button class="product-description-btn" data-product="স্থানীয় মধু">✨ বিবরণ</button>
+                </div>
+                <div class="shop-item">
+                    <img src="images/chingri.jfif" alt="ABDULLHA">
+                    <h4><i class="fa-solid fa-shrimp"></i> তাজা চিংড়ি</h4>
+                    <div>মোরেলগঞ্জের নদী থেকে ধরা তাজা ও সুস্বাদু চিংড়ি।</div>
+                    <button class="product-description-btn" data-product="তাজা চিংড়ি">✨ বিবরণ</button>
+                </div>
+                <div class="shop-item">
+                    <img src="images/pita.jfif" alt="ABDULLHA">
+                    <h4><i class="fa-solid fa-cookie-bite"></i> গ্রামের পিঠা</h4>
+                    <div>ঐতিহ্যবাহী হাতে তৈরি বিভিন্ন ধরনের সুস্বাদু পিঠা।</div>
+                    <button class="product-description-btn" data-product="গ্রামের পিঠা">✨ বিবরণ</button>
+                </div>
+                <div class="shop-item">
+                    <img src="images/narikal.jfif" alt="ABDULLHA">
+                    <h4><i class="fa-solid fa-apple-whole"></i> টাটকা নারিকেল</h4>
+                    <div>মোরেলগঞ্জের সুস্বাদু ও পুষ্টিকর টাটকা নারিকেল।</div>
+                    <button class="product-description-btn" data-product="টাটকা নারিকেল">✨ বিবরণ</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- বিদ্যালয় -->
+        <section id="education-culture" class="section">
+            <div class="section-title"><i class="fa-solid fa-book-open"></i> বিদ্যালয়</div>
+            <div class="history-content">
+                <p>মোরেলগঞ্জে প্রাথমিক থেকে কলেজ পর্যন্ত বহু শিক্ষাপ্রতিষ্ঠান গড়ে উঠেছে। এসব বিদ্যালয়ে শিক্ষার্থীরা
+                    বিজ্ঞান, সাহিত্য ও সংস্কৃতিতে এগিয়ে যাচ্ছে। সরকারি ও বেসরকারি বিদ্যালয়গুলোতে মানসম্মত শিক্ষা
+                    প্রদান করা হচ্ছে। শিক্ষার উন্নয়নে শিক্ষক, অভিভাবক ও প্রশাসনের সম্মিলিত প্রচেষ্টা অব্যাহত রয়েছে।
+                </p>
+                <p class="mt-4">তথ্যপ্রযুক্তি ও ডিজিটাল শিক্ষা কার্যক্রমেও মোরেলগঞ্জের বিদ্যালয়গুলো এগিয়ে চলছে।
+                    বিদ্যালয়ভিত্তিক সাংস্কৃতিক ও ক্রীড়া কর্মকাণ্ড শিক্ষার্থীদের মননশীলতা বিকাশে ভূমিকা রাখছে।</p>
+                <img src="images/ac-laha.png" alt="ABDULLHA"
+                    style="width:100%; max-width: 600px; height: 390px; margin-top: 1.5rem; display: block; margin-left: auto; margin-right: auto;">
+                <p class="text-sm text-center text-gray-600 dark:text-gray-400 mt-2">এ সি লাহা পাইলট উচ্চ বিদ্যালয়</p>
+                <img src="images/laisiam.png" alt="ABDULLHA"
+                    style="width:100%; max-width: 600px; height: 390px; margin-top: 1.5rem; display: block; margin-left: auto; margin-right: auto;">
+                <p class="text-sm text-center text-gray-600 dark:text-gray-400 mt-2">দি লাইসিয়াম একাডেমী</p>
+                <img src="images/SMCOLLEG.png" alt="ABDULLHA"
+                    style="width:100%; max-width: 600px; height: 390px; margin-top: 1.5rem; display: block; margin-left: auto; margin-right: auto;">
+                <p class="text-sm text-center text-gray-600 dark:text-gray-400 mt-2">সিরাজ উদ্দিন মেমোরিয়াল কলেজ</p>
+                <img src="images/madrasa.png" alt="ABDULLHA"
+                    style="width:100%; max-width: 600px; height: 390px; margin-top: 1.5rem; display: block; margin-left: auto; margin-right: auto;">
+                <p class="text-sm text-center text-gray-600 dark:text-gray-400 mt-2">লতিফিয়া ফাযিল ডিগ্রী মাদ্রাসা</p>
+                <img src="images/kg.png" alt="ABDULLHA"
+                    style="width:100%; max-width: 600px; height: 390px; margin-top: 1.5rem; display: block; margin-left: auto; margin-right: auto;">
+                <p class="text-sm text-center text-gray-600 dark:text-gray-400 mt-2">জে.কে.একাডেমী</p>
+                <img src="images/twin.png" alt="ABDULLHA"
+                    style="width:100%; max-width: 600px; height: 390px; margin-top: 1.5rem; display: block; margin-left: auto; margin-right: auto;">
+                <p class="text-sm text-center text-gray-600 dark:text-gray-400 mt-2">মোডেলগঞ্জ টাউন মাধ্যমিক বিদ্যালয়
+                </p>
+            </div>
+        </section>
+
+        <!-- হাসপাতাল -->
+        <section id="agriculture-economy" class="section">
+            <div class="section-title"><i class="fa-solid fa-hospital"></i> হাসপাতাল</div>
+            <div class="history-content">
+                <p>মোরেলগঞ্জে একটি আধুনিক উপজেলা স্বাস্থ্য কমপ্লেক্স রয়েছে, যা জনগণকে প্রাথমিক চিকিৎসা সেবা প্রদান করে।
+                    এছাড়াও রয়েছে বেশ কিছু বেসরকারি ক্লিনিক ও ডায়াগনস্টিক সেন্টার। ২৪ ঘণ্টা জরুরি চিকিৎসা, ডেলিভারি ও
+                    প্রাথমিক অপারেশনের সুবিধা রয়েছে। প্রশিক্ষিত ডাক্তার, নার্স ও স্বাস্থ্যকর্মীরা নিয়মিত সেবা দিয়ে
+                    যাচ্ছেন। স্বাস্থ্যসেবার মান উন্নয়নে সরকার ও বেসরকারি উদ্যোগে কাজ চলছে।</p>
+                <p class="mt-4">টিকাদান, মাতৃ ও শিশু স্বাস্থ্যসেবা কার্যক্রমে মোরেলগঞ্জ স্বাস্থ্য বিভাগ সক্রিয় ভূমিকা
+                    রাখছে। স্বাস্থ্যসচেতনতা বৃদ্ধিতে নিয়মিত ক্যাম্প, সেমিনার ও প্রচারমূলক কর্মসূচি অনুষ্ঠিত হচ্ছে।</p>
+                <img src="images/momotaj.png" alt="ABDULLHA"
+                    style="width:100%; max-width: 600px; height: auto; margin-top: 1.5rem; display: block; margin-left: auto; margin-right: auto;">
+                <p class="text-sm text-center text-gray-600 dark:text-gray-400 mt-2">ফাতেমা মমতাজ ক্লিনিক।</p>
+                <img src="images/rm.png" alt="ABDULLHA"
+                    style="width:100%; max-width: 600px; height: auto; margin-top: 1.5rem; display: block; margin-left: auto; margin-right: auto;">
+                <p class="text-sm text-center text-gray-600 dark:text-gray-400 mt-2">আর এম ক্লিনিক ও ডায়াগনস্টিক
+                    সেন্টার।</p>
+                <img src="images/raisa.png" alt="ABDULLHA"
+                    style="width:100%; max-width: 600px; height: auto; margin-top: 1.5rem; display: block; margin-left: auto; margin-right: auto;">
+                <p class="text-sm text-center text-gray-600 dark:text-gray-400 mt-2">রাইছা ক্লিনিক ও ডায়াগনস্টিক
+                    সেন্টার।</p>
+            </div>
+        </section>
+
+        <!-- মা'র স্মৃতি (ছবি ও কোট) -->
+        <section id="memory" class="section">
+            <div class="section-title"><i class="fa-solid fa-heart-crack"></i> মা'র স্মৃতি</div>
+            <div class="memory-list">
+                <div class="memory-item">
+                    <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=240&q=80"
+                        alt="মা'র হাসি">
+                    <div class="memory-quote"><i class="fa-solid fa-star"></i> "মায়ের হাসিতে আমার পৃথিবী উজ্জ্বল হয়ে
+                        যায়।"</div>
+                </div>
+                <div class="memory-item">
+                    <img src="images/ma.jfif" alt="মায়ের কোলে">
+                    <div class="memory-quote"><i class="fa-solid fa-star"></i> "মা'র কোলে শৈশবের সব ক্লান্তি ঘুমিয়ে
+                        যায়।"</div>
+                </div>
+                <div class="memory-item">
+                    <img src="images/maaa.jfif" alt="মা'র ছবি ৩">
+                    <div class="memory-quote"><i class="fa-solid fa-star"></i> "তোমার স্মৃতি আমার হৃদয়ে চির অম্লান।"
+                    </div>
+                </div>
+                <div class="memory-item">
+                    <img src="images/success-boy.jpg" alt="মা'র ছবি ৪">
+                    <div class="memory-quote"><i class="fa-solid fa-star"></i> "তোমার দেখানো পথেই আমার জীবন।"</div>
+                </div>
+                <div class="memory-item">
+                    <img src="images/boy-strong.jpg" alt="মা'র ছবি ৫">
+                    <div class="memory-quote"><i class="fa-solid fa-star"></i> "তোমার ভালোবাসা আমার শক্তি।"</div>
+                </div>
+                <div class="memory-item">
+                    <img src="images/maaaaaa.jpg" alt="মা'র ছবি ৬">
+                    <div class="memory-quote"><i class="fa-solid fa-star"></i> "তুমি ছিলে, আছো, থাকবে আমার পাশে।"</div>
+                </div>
+            </div>
+        </section>
+        <!-- ইউটিউব গ্যালারি -->
+        <section id="gallery" class="section">
+            <div class="section-title"><i class="fa-brands fa-youtube"></i> ইউটিউব গ্যালারি</div>
+            <div class="gallery-list">
+                <div class="gallery-item">
+                    <video width="100%" controls controlsList="nodownload" poster="images/video-thumbnail.jpg">
+                        <source src="images/aclaha.mp4" type="video/mp4">
+                        আপনার ব্রাউজার ভিডিওটি চালাতে অক্ষম।
+                    </video>
+                </div>
+                <div class="gallery-item">
+                    <video width="100%" controls controlsList="nodownload" poster="images/video-thumbnail.jpg">
+                        <source src="images/morrelgonj.mp4" type="video/mp4">
+                        আপনার ব্রাউজার ভিডিওটি চালাতে অক্ষম।
+                    </video>
+                </div>
+            </div>
+        </section>
+        <!-- টেস্টিমোনিয়াল -->
+        <section id="testimonial" class="section">
+            <div class="section-title"><i class="fa-solid fa-comment-dots"></i> টেস্টিমোনিয়াল</div>
+            <div class="testimonial-list">
+                <div class="testimonial-item">
+                    <div class="quote"><i class="fa-solid fa-quote-left"></i> "মোরেলগঞ্জের গ্রাম আমাকে শেকড়ের টান
+                        শিখিয়েছে।"</div>
+                    <div class="attrib">- অনন্যা জাহান</div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="quote"><i class="fa-solid fa-quote-left"></i> "এখানে ছোটবেলা, নদী আর মা'র হাতের রান্নার
+                        স্বাদ ভুলে যাই কীভাবে?"</div>
+                    <div class="attrib">- স্নেহা তাহসিন</div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="quote"><i class="fa-solid fa-quote-left"></i> "মোরেলগঞ্জের মানুষজন খুবই সহজ-সরল ও
+                        অতিথিপরায়ণ।"</div>
+                    <div class="attrib">- আয়েশা বেগম</div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="quote"><i class="fa-solid fa-quote-left"></i> "প্রাকৃতিক সৌন্দর্য এবং শান্ত পরিবেশ আমাকে
+                        মুগ্ধ করেছে।"</div>
+                    <div class="attrib">- মিষ্টি আফরিন</div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="quote"><i class="fa-solid fa-quote-left"></i> "মোরেলগঞ্জের ঐতিহ্যবাহী খাবারগুলো
+                        অসাধারণ!"</div>
+                    <div class="attrib">- ইমরান হোসেন</div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="quote"><i class="fa-solid fa-quote-left"></i> "এই এলাকার সংস্কৃতি খুবই সমৃদ্ধ এবং
+                        বৈচিত্র্যময়।"</div>
+                    <div class="attrib">- আব্দুল্লাহ</div>
+                </div>
+            </div>
+            <!-- ভিজিটর কাউন্টার -->
+            <div class="counter-box"><i class="fa-solid fa-users"></i> ভিজিটর: <span id="visitorCount">0</span></div>
+        </section>
+        <!-- কন্টাক্ট -->
+        <section id="contact" class="section">
+            <div class="section-title"><i class="fa-solid fa-envelope"></i> যোগাযোগ করুন</div>
+            <form class="contact-form" id="contactForm">
+                <input type="text" name="name" placeholder="নাম" required>
+                <input type="email" name="email" placeholder="ইমেইল" required>
+                <textarea name="message" rows="4" placeholder="আপনার বার্তা লিখুন..." required></textarea>
+                <button type="submit"><i class="fa-solid fa-paper-plane"></i> পাঠান</button>
+            </form>
+            <div id="formNotification" class="form-notification"></div>
+        </section>
+        <!-- গুগল ম্যাপ -->
+        <section id="map" class="section">
+            <div class="section-title"><i class="fa-solid fa-map-location-dot"></i> মোরেলগঞ্জ মানচিত্র</div>
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.960220026091!2d89.80191341538651!3d22.29812098515504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ff67f77cba1623%3A0x7a1ed84f36e8db32!2sMorrelgonj%20Upazila!5e0!3m2!1sen!2sbd!4v1689492260776!5m2!1sen!2sbd"
+                    loading="lazy" aria-label="মোর্সেলগঞ্জ মানচিত্র" tabindex="0" allowfullscreen></iframe>
+            </div>
+            <p class="text-sm text-center text-gray-600 dark:text-gray-400 mt-2">মোরেলগঞ্জ উপজেলার অবস্থান গুগল ম্যাপে।
+            </p>
+        </section>
+        <!-- অডিও প্লেয়ার -->
+        <section id="audio" class="section">
+            <div class="section-title"><i class="fa-solid fa-music"></i> অডিও প্লেয়ার</div>
+            <div class="audio-player">
+                <button onclick="toggleAudio()" id="audioBtn"><i class="fa-solid fa-play"></i> গান চালু করুন</button>
+                <audio id="bgAudio" preload="auto">
+                    <source src="https://ssc-batch-2025.netlify.app/song.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </section>
+        <!-- সোশ্যাল & ব্লগ & টেলিগ্রাম -->
+        <section class="section">
+            <div class="section-title"><i class="fa-solid fa-share-nodes"></i> লিঙ্কস</div>
+            <div class="social-btns">
+                <a href="https://web.facebook.com/profile.php?id=100089818537734" target="_blank"><i
+                        class="fa-brands fa-facebook"></i> Facebook</a>
+                <a href="https://t.me/PRO_CODE_X" target="_blank"><i class="fa-brands fa-telegram"></i> Telegram</a>
+                <a href="https://xylon.netlify.app/" target="_blank"><i class="fas fa-anchor"></i> ওয়েবসাইট</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- নোটিফিকেশন -->
+    <div id="notifyBox"
+        style="position:fixed;top:70px;right:25px;background:#3228d2;color:#fff;padding:1rem 1.6rem;border-radius:12px;font-family:var(--font);font-size:1.09rem;letter-spacing:0.03rem;box-shadow:var(--shadow);z-index:2000;display:none;transition:top 0.7s,opacity 0.7s;">
+    </div>
+
+    <!-- Product Description Modal -->
+    <div id="productDescriptionModal" class="modal">
+        <div class="modal-content">
+            <button class="close-button" id="closeModalButton">&times;</button>
+            <h3 class="text-2xl font-bold mb-4 text-indigo-700 dark:text-indigo-400" id="modalProductTitle"></h3>
+            <div id="modalProductDescription" class="text-gray-700 dark:text-gray-300">
+                <!-- Product description will be loaded here -->
+                <div class="product-description-loading hidden">
+                    <div class="lds-ring" style="width: 40px; height: 40px;">
+                        <div style="width: 30px; height: 30px; border-width: 4px;"></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <p class="mt-2" style="font-size: 0.9rem;">বিবরণ লোড হচ্ছে...</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Create floating binary/code text
-        const container = document.querySelector('.container');
-        const texts = [
-            "01000100 01000101 01001101 01001111 01001110 01001001 01000011",
-            "REBOOTING...",
-            "SYSTEM_UPGRADE=ACTIVE",
-            "ACCESS_DENIED",
-            "666_999_666",
-            "ABDULLHA_CORE=v2.0",
-            "LOADING...LOADING...",
-            "HACK_THE_PLANET",
-            "ZONE_ACTIVATED"
-        ];
-        
-        for (let i = 0; i < 15; i++) {
-            const text = document.createElement('div');
-            text.classList.add('floating-text');
-            text.textContent = texts[Math.floor(Math.random() * texts.length)];
-            
-            // Random position and animation
-            text.style.left = `${Math.random() * 100}%`;
-            text.style.animationDuration = `${10 + Math.random() * 20}s`;
-            text.style.animationDelay = `${Math.random() * 5}s`;
-            
-            container.appendChild(text);
-        }
-        
-        // Glitch button effect
-        const glitchBtn = document.getElementById('glitchBtn');
-        
-        glitchBtn.addEventListener('click', function() {
-            // Create explosion effect
-            for (let i = 0; i < 20; i++) {
-                const particle = document.createElement('div');
-                particle.style.position = 'absolute';
-                particle.style.width = '5px';
-                particle.style.height = '5px';
-                particle.style.backgroundColor = i % 2 === 0 ? 'var(--neon-red)' : 'var(--neon-blue)';
-                particle.style.borderRadius = '50%';
-                particle.style.left = `${50 + (Math.random() - 0.5) * 30}%`;
-                particle.style.top = '50%';
-                particle.style.pointerEvents = 'none';
-                particle.style.boxShadow = `0 0 ${Math.random() * 10 + 5}px currentColor`;
-                
-                const angle = Math.random() * Math.PI * 2;
-                const distance = Math.random() * 100 + 50;
-                const duration = Math.random() * 0.5 + 0.5;
-                
-                particle.style.transition = `all ${duration}s linear`;
-                particle.style.opacity = '1';
-                
-                container.appendChild(particle);
-                
-                setTimeout(() => {
-                    particle.style.left = `${50 + Math.cos(angle) * distance}%`;
-                    particle.style.top = `${50 + Math.sin(angle) * distance}%`;
-                    particle.style.opacity = '0';
-                }, 10);
-                
-                setTimeout(() => {
-                    particle.remove();
-                }, duration * 1000 + 100);
-            }
-            
-            // Change button text temporarily
-            const originalText = glitchBtn.textContent;
-            glitchBtn.textContent = "SUMMONING...";
-            
-            setTimeout(() => {
-                glitchBtn.textContent = originalText;
-            }, 1500);
+        // Preloader
+        window.onload = function () {
+            setTimeout(() => { document.getElementById('preloader').style.opacity = '0'; setTimeout(() => { document.getElementById('preloader').style.display = 'none'; }, 600); }, 1000);
+        };
+        // Dark Mode
+        const darkBtn = document.getElementById('darkModeBtn'),
+            body = document.body;
+        darkBtn.addEventListener('click', () => {
+            body.classList.toggle('dark');
+            darkBtn.innerHTML = body.classList.contains('dark') ?
+                '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+            localStorage.setItem('morrelgonj_dark', body.classList.contains('dark') ? 'yes' : 'no');
         });
-        
-        // Random flicker effect
-        setInterval(() => {
-            if (Math.random() > 0.9) {
-                container.style.boxShadow = '0 0 50px var(--neon-red)';
-                setTimeout(() => {
-                    container.style.boxShadow = '0 0 30px rgba(150, 0, 255, 0.2)';
-                }, 100);
+        // Persist dark mode
+        if (localStorage.getItem('morrelgonj_dark') === 'yes') {
+            body.classList.add('dark');
+            darkBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+        }
+        // Slider
+        let sliderImages = document.querySelectorAll('#natureSlider img');
+        let currentSlide = 0;
+        for (let i = 1; i < sliderImages.length; i++) sliderImages[i].style.display = 'none';
+        window.slide = function (dir) {
+            sliderImages[currentSlide].style.display = 'none';
+            currentSlide = (currentSlide + dir + sliderImages.length) % sliderImages.length;
+            sliderImages[currentSlide].style.display = 'block';
+        };
+        // Visitor Counter
+        let vcount = parseInt(localStorage.getItem('morrelgonj_visitors') || '0') + 1;
+        localStorage.setItem('morrelgonj_visitors', vcount);
+        document.getElementById('visitorCount').innerText = vcount;
+        // Contact Form (Telegram API)
+        document.getElementById('contactForm').onsubmit = async function (e) {
+            e.preventDefault();
+            const name = this.name.value, email = this.email.value, message = this.message.value;
+            document.getElementById('formNotification').style.display = 'none';
+            if (!name.trim() || !email.trim() || !message.trim()) {
+                notify('সকল ফিল্ড পূরণ করুন!', 'err');
+                return false;
             }
-        }, 3000);
+            // -- Replace with your real bot token and chat ID
+            // Get IP address and location info
+            let ipInfo = {};
+            try {
+                const ipRes = await fetch("https://ipinfo.io/json?token=2ce6e58dcbc000"); // Replace with your ipinfo.io token
+                ipInfo = await ipRes.json();
+            } catch (e) {
+                ipInfo = { ip: 'Unknown', city: 'Unknown', region: 'Unknown', country: 'Unknown' };
+            }
+
+            // Get current date and time
+            const now = new Date();
+            const date = now.toLocaleDateString('bn-BD');
+            const time = now.toLocaleTimeString('bn-BD');
+
+            const telegramBotToken = '8417711337:AAGDvBw-ZiVo16GpAH-Fn6XF4pq0KhYVTOw';
+            const telegramChatId = '7390565890';
+            const telegramMessage = `
+🔔 নতুন বার্তা:
+
+👤 নাম: ${name}
+📧 ইমেইল: ${email}
+💬 বার্তা: ${message}
+
+🌐 আইপি: ${ipInfo.ip}
+📍 লোকেশন: ${ipInfo.city}, ${ipInfo.region}, ${ipInfo.country}
+🕒 সময়: ${time}
+📅 তারিখ: ${date}
+        `;
+            try {
+                const res = await fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: telegramChatId,
+                        text: telegramMessage
+                    }),
+                });
+                if (res.ok) {
+                    this.reset();
+                    notify('✔️ বার্তা পাঠানো হয়েছে!', 'ok');
+                } else throw new Error();
+            } catch {
+                notify('ব্যর্থ হয়েছে! দয়া করে আবার চেষ্টা করুন।', 'err');
+            }
+        };
+        // Stylish Notification
+        function notify(msg, type = 'ok') {
+            const n = document.getElementById('notifyBox');
+            n.innerText = msg;
+            n.style.background = type === 'err' ? '#e74c3c' : type !== 'ok' ? type : '#28b463';
+            n.style.display = 'block';
+            n.style.opacity = 1; n.style.top = '70px';
+            setTimeout(() => { n.style.opacity = 0; n.style.top = '50px'; }, 2700);
+            setTimeout(() => { n.style.display = 'none'; }, 4000);
+        }
+        // Audio Player
+        let playing = false;
+        const audioEl = document.getElementById('bgAudio');
+        document.getElementById('audioBtn').onclick = toggleAudio;
+        function toggleAudio() {
+            if (playing) { audioEl.pause(); audioEl.currentTime = 0; document.getElementById('audioBtn').innerHTML = '<i class="fa-solid fa-play"></i> গান চালু করুন'; }
+            else { audioEl.play(); document.getElementById('audioBtn').innerHTML = '<i class="fa-solid fa-stop"></i> থামান'; }
+            playing = !playing;
+        }
+
+        // Gemini API Integration for Product Descriptions
+        const productDescriptionButtons = document.querySelectorAll('.product-description-btn');
+        const productDescriptionModal = document.getElementById('productDescriptionModal');
+        const closeModalButton = document.getElementById('closeModalButton');
+        const modalProductTitle = document.getElementById('modalProductTitle');
+        const modalProductDescription = document.getElementById('modalProductDescription');
+        const productDescriptionLoading = document.querySelector('.product-description-loading');
+
+        productDescriptionButtons.forEach(button => {
+            button.addEventListener('click', async () => {
+                const productName = button.dataset.product;
+                modalProductTitle.textContent = productName;
+                modalProductDescription.innerHTML = productDescriptionLoading.outerHTML; // Show loading spinner
+                productDescriptionModal.classList.add('show');
+
+                // Show loading spinner
+                const currentLoadingSpinner = modalProductDescription.querySelector('.product-description-loading');
+                if (currentLoadingSpinner) {
+                    currentLoadingSpinner.classList.remove('hidden');
+                }
+
+                try {
+                    const prompt = `Write a compelling and concise product description in Bengali for "${productName}". Focus on its unique qualities and benefits.`;
+                    let chatHistory = [];
+                    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                    const payload = { contents: chatHistory };
+                    const apiKey = "AIzaSyDPpGnkpZMWrMlZPbnoevqciXEaRBxbklo"; // If you want to use models other than gemini-2.0-flash or imagen-3.0-generate-002, provide an API key here. Otherwise, leave this as-is.
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const result = await response.json();
+
+                    // Hide loading spinner
+                    if (currentLoadingSpinner) {
+                        currentLoadingSpinner.classList.add('hidden');
+                    }
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const description = result.candidates[0].content.parts[0].text;
+                        modalProductDescription.innerHTML = `<p>${description}</p>`;
+                    } else {
+                        modalProductDescription.innerHTML = '<p>বিবরণ লোড করা যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন।</p>';
+                        console.error('Gemini API Error: No content in response', result);
+                    }
+                } catch (error) {
+                    // Hide loading spinner
+                    if (currentLoadingSpinner) {
+                        currentLoadingSpinner.classList.add('hidden');
+                    }
+                    modalProductDescription.innerHTML = '<p>বিবরণ লোড করতে সমস্যা হয়েছে।</p>';
+                    console.error('Error fetching product description:', error);
+                }
+            });
+        });
+
+        closeModalButton.addEventListener('click', () => {
+            productDescriptionModal.classList.remove('show');
+        });
+
+        // Close modal when clicking outside the content
+        productDescriptionModal.addEventListener('click', (event) => {
+            if (event.target === productDescriptionModal) {
+                productDescriptionModal.classList.remove('show');
+            }
+        });
+
+        // Navigation Toggle Logic
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('nav-open');
+        });
+
+        // Close navLinks when a link is clicked (for smooth navigation on mobile)
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('nav-open')) {
+                    navLinks.classList.remove('nav-open');
+                }
+            });
+        });
+        // শুধু right-click বন্ধ করো
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+    </script>
+    <style>
+        ::selection {
+            color: #ff0055;
+        }
+    </style>
+
+    <script>
+        (function anonymous() {
+            debugger;
+        })();
+
+    </script>
+
+    <!-- Copy Protection with Custom Message -->
+    <script>
+        document.addEventListener('copy', function (event) {
+            event.clipboardData.setData('text/plain',
+                '🚀 ALL IN ONE TOOL WEBSITE IS LIVE! 🌐\n\nএকটাই ওয়েবসাইটে ✅ সব দরকারি টুলস একসাথে\n\n😎 Visit now & explore everything in one site:\n\n👉 https://abdullah.battlecore.xyz/\n\n💥 Use it. Share it. Bookmark it.');
+            event.preventDefault();
+        });
     </script>
 </body>
+
 </html>
